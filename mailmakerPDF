@@ -1,0 +1,42 @@
+import sys;
+args = sys.argv[1 :]
+
+# sender, password, receiver, subject, body, resume
+
+
+
+from email.message import EmailMessage
+import ssl
+import smtplib
+import datetime
+import time
+from email import encoders
+from email.mime.base import MIMEBase
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+
+
+def sendEmail(sender, password, receiver, subject, body, resume = None):
+    sender, password, receiver, subject, body = [open(arg).read() for arg in (sender, password, receiver, subject, body)]
+
+    context = ssl.create_default_context()
+    em = EmailMessage()
+    em['From'] = sender
+    em['To'] = receiver
+    em['Subject'] = subject + ' ' + datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")
+    em.set_content(body + '\n' + datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y"))
+
+    if resume:
+        content = open(resume, 'rb').read()
+        em.add_attachment(content, maintype = 'application', subtype = 'pdf', filename = resume)
+
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+        smtp.login(sender, password)
+        smtp.sendmail(sender, receiver, em.as_string())
+        print('sent')
+
+if __name__ == '__main__':
+    if not len(args):
+        args = 'sender.txt password.txt receiver.txt subject.txt body.txt'.split()
+    sendEmail(*args)
