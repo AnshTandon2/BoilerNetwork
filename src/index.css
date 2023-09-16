@@ -1,0 +1,32 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+/* Set the background color to black */
+body {
+  margin: 0;
+  background-color: #000;
+  font-family: "Roboto", sans-serif; /* Use Roboto for body text */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Set the text color to gold */
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+  color: #ffd700; /* Gold color */
+}
+
+/* Apply Pacifico font to headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Pacifico", cursive; /* Use Pacifico for headings */
+  color: #ffd700; /* Gold color for headings */
+}
