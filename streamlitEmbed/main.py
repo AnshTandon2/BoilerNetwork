@@ -2,10 +2,14 @@ import streamlit as st
 from streamlit.logger import get_logger
 from streamlit_card import card
 from datetime import datetime
+from email.message import EmailMessage
+import ssl
+import smtplib
 import sqlite3
 import time
 import pickle
 import openai
+import os
 
 st.set_page_config(
         page_title="Dashboard",
@@ -91,9 +95,7 @@ class User:
 user = User("", "", "", "")
 
 def model():
-
-    openai.api_key = "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"
-
+    openai.api_key = ""
     with open('streamlitEmbed/data/temp.txt', 'rb') as pickle_file:
         data = pickle.load(pickle_file)
 
@@ -116,7 +118,7 @@ def model():
         data["additionalInformation"]
         )
 
-    prompt = f'''Write a descriptive email to a researcher about why you as an individual would be interested in working with them and learning from their experience. Explain why you think their project is interesting in the context of the problem description and your own background. Please be formal, use professional language, and reference the information in the documents to make a strong case for why you are a good candidate. Always say Best Regards, and your name at the end, and the beginning always include an introduction to yourself and why you are so passionate about the subject, please be heartfelt, cringey, and use varying sentence structure throughout. Be cordial as well! Be extremely descriptive and use complex vocabulary.
+    prompt = f'''Write a descriptive email to a researcher about why you as an individual would be interested in working with them and learning from their experience. Explain why you think their project is interesting in the context of the problem description and your own background. Please be formal, use professional language, and reference the information in the documents to make a strong case for why you are a good candidate. Always say Best Regards, and your name at the end, and the beginning always include an introduction to yourself and why you are so passionate about the subject, please be heartfelt, cringey, and use varying sentence structure throughout. Be cordial as well! Be extremely descriptive and use complex vocabulary. Don't use I as much, be more dynamic.
     Professor Research Project Context: {professorContext}
     Your Own Personal Context: {userContext}
     '''
@@ -130,6 +132,34 @@ def model():
     answer = response.choices[0].text
 
     return answer
+
+def sendEmail(subject, body, to = None, cc = None, bcc = None, pdf = None):
+    sender, password, = [open(arg).read() for arg in ('streamlitEmbed/sender.txt', 'streamlitEmbed/password.txt')]
+    to, cc, bcc = [[] if not addr else addr.split() for addr in (to, cc, bcc)]
+
+    context = ssl.create_default_context()
+    smtp = smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context)
+    smtp.login(sender, password)
+
+    for receiver in to + cc + bcc:
+        em = EmailMessage()
+        em['From'] = sender
+        em['To'] = ', '.join(to)
+        em['Cc'] = ', '.join(cc)
+        em['Subject'] = subject
+        em.set_content(body)
+        # em['Subject'] = subject + ' ' + datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")
+        # em.set_content(body) + '\n' + datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y"))
+
+        if pdf:
+            content = open(pdf, 'rb').read()
+            em.add_attachment(content, maintype = 'application', subtype = 'pdf', filename = pdf)
+        
+        if receiver in bcc:
+            em['Bcc'] = receiver
+        
+        smtp.sendmail(sender, receiver, em.as_string())
+        print(f'sent to {receiver}')
 
 def nextpage(): st.session_state.page += 1
 
@@ -213,7 +243,7 @@ def emailForm(userEmail, profEmail, subject, body, resumePath):
 
     if submitted:
         'Please wait as we send your email...'
-        mailmakerComplex.sendEmail(subject, body, to = profEmail, bcc = userEmail, pdf = resumePath)
+        sendEmail(subject=subject, body=body, to = profEmail, bcc = userEmail)
         'The email has been sent, and you have received a copy in your inbox.'
         st.balloons()
         nextButton = st.button("RESTART", on_click=restart)
