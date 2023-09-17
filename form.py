@@ -2,6 +2,14 @@ import streamlit as st
 from datetime import datetime
 import mailmakerComplex
 
+# userEmail - a string containing the users email
+#     example: 'arnavgrover@gmail.com'
+# profEmail - a string containing professors' emails, separated by spaces
+#     example: 'stooshievangooglie@gmail.com stevenmonko@outlook.com'
+# subject - a string without new line characters containing the subject of the email
+#     example: 'I want to do research with you about artificial intelligence'
+# resumePath - a string containing the path of a pdf file (the resume)
+#     example: 'resume.pdf' and 'user/resume.pdf'
 
 def emailForm(userEmail, profEmail, subject, body, resumePath):
     form = st.form('sdkalfjdslajld form')
