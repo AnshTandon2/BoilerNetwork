@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/HorrorHacksWebsiteHackathon/static/css/main.3066b1fd.css",
+    "main.js": "/HorrorHacksWebsiteHackathon/static/js/main.8c928754.js",
+    "static/media/purdue.png": "/HorrorHacksWebsiteHackathon/static/media/purdue.eaec441fa23e8c06bb64.png",
+    "static/media/personIcon.png": "/HorrorHacksWebsiteHackathon/static/media/personIcon.9115187122df65ba733c.png",
+    "index.html": "/HorrorHacksWebsiteHackathon/index.html",
+    "main.3066b1fd.css.map": "/HorrorHacksWebsiteHackathon/static/css/main.3066b1fd.css.map",
+    "main.8c928754.js.map": "/HorrorHacksWebsiteHackathon/static/js/main.8c928754.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3066b1fd.css",
+    "static/js/main.8c928754.js"
+  ]
+}
