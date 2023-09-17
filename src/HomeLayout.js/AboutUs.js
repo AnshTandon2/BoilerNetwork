@@ -5,7 +5,10 @@ import { useState } from "react";
 import Creators from "./Creators";
 
 const AboutUs = () => {
-  let Image1 = require("../assets/personIcon.png");
+  let Image1 = require("../assets/anshpho.jpeg");
+  let Image2 = require("../assets/shrung.jpeg");
+  let Image3 = require("../assets/arnav.jpeg");
+  let Image4 = require("../assets/steven.jpg");
 
   const [names, setNames] = useState([
     {
@@ -13,15 +16,15 @@ const AboutUs = () => {
       name: "Ansh",
     },
     {
-      image: Image1,
+      image: Image2,
       name: "Shrung",
     },
     {
-      image: Image1,
+      image: Image3,
       name: "Arnav",
     },
     {
-      image: Image1,
+      image: Image4,
       name: "Steven",
     },
   ]);

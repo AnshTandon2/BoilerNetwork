@@ -45,7 +45,7 @@ const Home = () => {
           className="navbutton justify-center"
         >
           <a
-            href="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfkf0Y0ymLGJMW1GeFMFc1Cy2ckXz2X1UDbI_4SeB1tgRMZUg/closedform"
+            href="https://boilernet.streamlit.app/"
             className="p-5 px-10 rounded-full bg-[#ffc77d] text-[#f5764f] font-semibold text-xl hover:bg-[#fcb04c] hover:text-[#fa6d42]"
           >
             Continue

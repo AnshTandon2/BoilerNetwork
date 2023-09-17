@@ -19,20 +19,20 @@ const Description = () => {
 
   return (
     <div className="my-32 ml-10 mr-10 text-black" style={descriptionStyle}>
-      <h2 style={headingStyle}>Welcome to BoilerNetwork!</h2>
+      <h2 style={headingStyle}>Welcome to BoilerNet!</h2>
       <p style={paragraphStyle}>
         This is an innovative platform that automates the often challenging
         process Purdue students face when reaching out to professors for
         research and internship opportunities.
       </p>
       <p style={paragraphStyle}>
-        Our application offers a unique gaming experience that allows users to
-        navigate through different levels of difficulty while having fun during
-        the spooky season.
+        Our application offers a unique experience that lets students navigate
+        through a list of professors and learn about their ongoing research
+        projects.
       </p>
       <p style={paragraphStyle}>
         Whether you're a student looking to make valuable connections or simply
-        seeking an entertaining experience, BoilerNetwork has something for
+        seeking an entertaining experience, BoilerNet has something for
         everyone!
       </p>
     </div>

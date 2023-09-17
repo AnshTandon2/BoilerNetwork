@@ -1,7 +1,5 @@
-
-import Navbar from "./component/Navbar"
+import Navbar from "./component/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
 
 // web pages
 import Home from "./pages/Home";
@@ -12,11 +10,11 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
-        <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/pumpkins' element={<Pumpkins />} />
-        <Route path='/game' element={<Game />} />
-        </Routes>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/signin" element={<Pumpkins />} />
+        <Route path="/boilernet" element={<Game />} />
+      </Routes>
     </BrowserRouter>
   );
 }
