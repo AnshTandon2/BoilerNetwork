@@ -1,5 +1,5 @@
-import sys;
-args = sys.argv[1 :]
+# import sys;
+# args = sys.argv[1 :]
 
 # sender, password, subject, body, (to), (cc), (bcc), (pdf)
 
@@ -7,9 +7,14 @@ from email.message import EmailMessage
 import ssl
 import smtplib
 
-def sendEmail(sender, password, subject, body, to = None, cc = None, bcc = None, pdf = None):
-    sender, password, subject, body = [open(arg).read() for arg in (sender, password, subject, body)]
-    to, cc, bcc = [[] if not path else open(path).read().split() for path in (to, cc, bcc)]
+# def sendEmail():
+#     args = 'sender.txt password.txt subject.txt body.txt to.txt cc.txt bcc.txt resume.pdf'.split()
+#     sendEmail(*args)
+
+#              str      str   str         str         str         path
+def sendEmail(subject, body, to = None, cc = None, bcc = None, pdf = None):
+    sender, password, = [open(arg).read() for arg in ('sender.txt', 'password.txt')]
+    to, cc, bcc = [[] if not addr else addr.split() for addr in (to, cc, bcc)]
 
     context = ssl.create_default_context()
     smtp = smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context)
@@ -35,7 +40,7 @@ def sendEmail(sender, password, subject, body, to = None, cc = None, bcc = None,
         smtp.sendmail(sender, receiver, em.as_string())
         print(f'sent to {receiver}')
     
-if __name__ == '__main__':
-    if not len(args):
-        args = 'sender.txt password.txt subject.txt body.txt to.txt cc.txt bcc.txt resume.pdf'.split()
-    sendEmail(*args)
+# if __name__ == '__main__':
+#     if not len(args):
+#         args = 'sender.txt password.txt subject.txt body.txt to.txt cc.txt bcc.txt resume.pdf'.split()
+#     sendEmail(*args)
