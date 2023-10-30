@@ -9,7 +9,7 @@ import { Form } from "react-router-dom";
 const Home = () => {
   // Light tan color
   const lightTan = "#F5DEB3";
-
+  //updates
   return (
     <>
       <div
